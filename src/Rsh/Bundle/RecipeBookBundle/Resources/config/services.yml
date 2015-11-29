@@ -1,0 +1,4 @@
+services:
+#    rsh_recipe_book.example:
+#        class: Rsh\Bundle\RecipeBookBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

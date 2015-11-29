@@ -1,0 +1,7 @@
+rsh_recipe_book:
+    resource: "@RshRecipeBookBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

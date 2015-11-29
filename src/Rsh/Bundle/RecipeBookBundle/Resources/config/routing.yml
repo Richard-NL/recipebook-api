@@ -1,0 +1,7 @@
+rsh_recipe_book_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: RshRecipeBookBundle:Default:index }
+
+rsh_recipe_book_recipe:
+    path:     /api/recipes
+    defaults: { _controller: RshRecipeBookBundle:Recipe:index }
