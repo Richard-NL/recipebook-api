@@ -18,28 +18,28 @@ class Ingredient
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
      *
      * @ORM\Column(name="imageUrl", type="string", length=255, nullable=true)
      */
-    private $imageUrl;
+    protected $imageUrl;
 
 
     /**
@@ -50,6 +50,12 @@ class Ingredient
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**

@@ -24,27 +24,29 @@ class Recipe
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var
+     * @Serializer\Expose
+     * @Serializer\Type("ArrayCollection<Rsh\Bundle\RecipeBookBundle\Entity\Ingredient>")
      * @ORM\ManyToMany(targetEntity="Ingredient")
      */
-    private $ingredients;
+    protected $ingredients;
 
 
     /**
@@ -55,6 +57,12 @@ class Recipe
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**

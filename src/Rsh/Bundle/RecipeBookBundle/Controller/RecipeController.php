@@ -36,6 +36,24 @@ class RecipeController extends Controller
         );
 
         $json = $this->container->get('serializer')->serialize($paginatedCollection, 'json');
-        return new Response($json, 200, array('application/json'));
+        return new Response($json, 200, ['application/json']);
+    }
+
+    public function postAction(Request $request)
+    {
+        $data = $request->getContent();
+        $recipe = $this->container->get('serializer')->deserialize($data, 'Rsh\Bundle\RecipeBookBundle\Entity\Recipe', 'json');
+        $entityManager = $this->getDoctrine()->getManager();
+        $recipe->setCreatedAt(new \DateTime());
+
+        $ingredients = $recipe->getIngredients();
+
+        foreach ($ingredients as $ingredient) {
+            $ingredient = $entityManager->merge($ingredient);
+        }
+
+        $entityManager->persist($recipe);
+        $entityManager->flush();
+        return new Response('{"message":"all_your_base_are_belong_to_us"}', 200, ['application/json']);
     }
 }

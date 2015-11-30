@@ -5,3 +5,9 @@ rsh_recipe_book_homepage:
 rsh_recipe_book_recipe:
     path:     /api/recipes
     defaults: { _controller: RshRecipeBookBundle:Recipe:index }
+    methods:  [GET]
+
+rsh_recipe_book_recipe_new:
+    path:     /api/recipes
+    defaults: { _controller: RshRecipeBookBundle:Recipe:post }
+    methods:  [POST]
