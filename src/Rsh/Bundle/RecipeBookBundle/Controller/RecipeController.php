@@ -47,13 +47,22 @@ class RecipeController extends Controller
         $recipe->setCreatedAt(new \DateTime());
 
         $ingredients = $recipe->getIngredients();
-
+        $ids = [];
         foreach ($ingredients as $ingredient) {
-            $ingredient = $entityManager->merge($ingredient);
+            $ids []= $ingredient->getId();
         }
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('i')
+            ->from('Rsh\Bundle\RecipeBookBundle\Entity\Ingredient', 'i')
+            ->where('i.id IN (:ids)')
+            ->setParameter('ids', $ids);
+        $query = $queryBuilder->getQuery();
 
+        $fetchedIngredients = $query->getResult();
+        $recipe->setIngredients($fetchedIngredients);
         $entityManager->persist($recipe);
         $entityManager->flush();
-        return new Response('{"message":"all_your_base_are_belong_to_us"}', 200, ['application/json']);
+        $json = $this->container->get('serializer')->serialize($recipe, 'json');
+        return new Response($json, 200, ['application/json']);
     }
 }
