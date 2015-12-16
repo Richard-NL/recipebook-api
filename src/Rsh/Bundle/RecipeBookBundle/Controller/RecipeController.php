@@ -47,19 +47,22 @@ class RecipeController extends Controller
         $recipe->setCreatedAt(new \DateTime());
 
         $ingredients = $recipe->getIngredients();
-        $ids = [];
-        foreach ($ingredients as $ingredient) {
-            $ids []= $ingredient->getId();
-        }
-        $queryBuilder = $entityManager->createQueryBuilder();
-        $queryBuilder->select('i')
-            ->from('Rsh\Bundle\RecipeBookBundle\Entity\Ingredient', 'i')
-            ->where('i.id IN (:ids)')
-            ->setParameter('ids', $ids);
-        $query = $queryBuilder->getQuery();
 
-        $fetchedIngredients = $query->getResult();
-        $recipe->setIngredients($fetchedIngredients);
+        if (!empty($ingredients)) {
+            $ids = [];
+            foreach ($ingredients as $ingredient) {
+                $ids []= $ingredient->getId();
+            }
+            $queryBuilder = $entityManager->createQueryBuilder();
+            $queryBuilder->select('i')
+                ->from('Rsh\Bundle\RecipeBookBundle\Entity\Ingredient', 'i')
+                ->where('i.id IN (:ids)')
+                ->setParameter('ids', $ids);
+            $query = $queryBuilder->getQuery();
+
+            $fetchedIngredients = $query->getResult();
+            $recipe->setIngredients($fetchedIngredients);
+        }
         $entityManager->persist($recipe);
         $entityManager->flush();
         $json = $this->container->get('serializer')->serialize($recipe, 'json');

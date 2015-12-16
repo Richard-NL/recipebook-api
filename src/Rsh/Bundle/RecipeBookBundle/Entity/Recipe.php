@@ -14,6 +14,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * @Hateoas\Relation("self", href = "expr('/api/recipes/' ~ object.getId())")
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Rsh\Bundle\RecipeBookBundle\Entity\RecipeRepository")
+ * @ORM\EntityListeners({"Rsh\Bundle\RecipeBookBundle\Listener\RecipeListener"})
  */
 class Recipe
 {

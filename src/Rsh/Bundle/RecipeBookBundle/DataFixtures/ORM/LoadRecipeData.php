@@ -36,27 +36,27 @@ class LoadRecipeData extends AbstractFixture implements ContainerAwareInterface,
         $recipe->addIngredient($this->getReference('ingredient-leek'));
         $manager->persist($recipe);
 
-        $recipeNames = [
-            'Sweet Potato Mash',
-            'Bread',
-            'Saoto Soup',
-            'Gumbo',
-            'Banana Bread',
-            'Paella',
-            'Pancakes',
-            'Apple Pie',
-            'Mojito',
-            'Roti',
-            'jambalaya',
-            'Hutspot'
-        ];
-
-        foreach ($recipeNames as $recipeName) {
-            $recipe = new Recipe();
-            $recipe->setName($recipeName);
-            $recipe->setCreatedAt(new \DateTime());
-            $manager->persist($recipe);
-        }
+//        $recipeNames = [
+//            'Sweet Potato Mash',
+//            'Bread',
+//            'Saoto Soup',
+//            'Gumbo',
+//            'Banana Bread',
+//            'Paella',
+//            'Pancakes',
+//            'Apple Pie',
+//            'Mojito',
+//            'Roti',
+//            'jambalaya',
+//            'Hutspot'
+//        ];
+//
+//        foreach ($recipeNames as $recipeName) {
+//            $recipe = new Recipe();
+//            $recipe->setName($recipeName);
+//            $recipe->setCreatedAt(new \DateTime());
+//            $manager->persist($recipe);
+//        }
 
 
         $manager->flush();
